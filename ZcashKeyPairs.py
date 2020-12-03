@@ -17,8 +17,8 @@ def hashing(a,flag):
     ripemd160 = hashlib.new("ripemd160")
     ripemd160.update(first_sha256.digest())
     return_0 = ripemd160.digest()
-    return_1 = bytes.fromhex("00") + ripemd160.digest()
-    return_2 = bytes.fromhex("6f") + ripemd160.digest()
+    return_1 = bytes.fromhex("1CB8") + ripemd160.digest()
+    return_2 = bytes.fromhex("1d25") + ripemd160.digest()
 
     if flag == 'Testnet':
         return return_0, return_2
@@ -40,19 +40,19 @@ def compressed_key(d):
     a = d.hex()
 
     if a[-1] == '0' or a[-1] == '2' or a[-1] == '4' or a[-1] == '6' or a[-1] == '8' or a[-1] == 'a' or a[-1] == 'c' or a[-1] == 'e':
-        return bytes.fromhex("02") + d
+        return bytes.fromhex("02") + d[:32]
     
     else:
-        return bytes.fromhex("03") + d
+        return bytes.fromhex("03") + d[:32]
 
 
-class BitcoinTestAddress:
+class ZcashTestAddress:
     
     def __init__(self,**kwargs):
         if 'private_key' in kwargs.keys():
             self.__private_key = kwargs['private_key']
         else:
-            self.__private_key = BitcoinTestAddress.__generate_private_key()
+            self.__private_key = ZcashTestAddress.__generate_private_key()
         self.__public_key = self.__generate_public_key()
         self.__address = self.__generate_address()
     
@@ -90,13 +90,13 @@ class BitcoinTestAddress:
     
 
 
-class BitcoinMainAddress:
+class ZcashMainAddress:
     
     def __init__(self,**kwargs):
         if 'private_key' in kwargs.keys():
             self.__private_key = kwargs['private_key']
         else:
-            self.__private_key = BitcoinMainAddress.__generate_private_key()
+            self.__private_key = ZcashMainAddress.__generate_private_key()
         self.__public_key = self.__generate_public_key()
         self.__address = self.__generate_address()
     
@@ -110,6 +110,7 @@ class BitcoinMainAddress:
         sk = ecdsa.SigningKey.from_string(bytes.fromhex(self.__private_key), curve = ecdsa.SECP256k1) 
         verification_key = sk.verifying_key
         public_key = bytes.fromhex("04") +  verification_key.to_string()
+        #public_key = compressed_key(verification_key.to_string())
         return public_key.hex()
     
     
@@ -134,9 +135,17 @@ class BitcoinMainAddress:
 
 
 
-a = BitcoinMainAddress()
+#a = ZcashMainAddress(private_key = '376fffae89e7373d823c7da399f2b1394ace362d4ca7494b37192b8218e43f2a')
+#print(a.private_key)
+#print(a.public_key)
+#print(a.address)
 
-
-print(a.private_key)
-print(a.public_key)
-print(a.address)
+#b = ZcashMainAddress(private_key ='f2a944f14862ce1210fc7014814f42ebfe2bcffc0abd09f80c0dba5bbee065e7')
+#print(b.private_key)
+#print(b.public_key)
+#print(b.address)
+        
+c = ZcashMainAddress(private_key='c947b9ace5a0e570b9a4b406da290536c72071b5c2bd0d65f919e78178c889b5')
+print(c.private_key)
+print(c.public_key)
+print(c.address)
