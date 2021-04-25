@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bitcoin Address Genereator</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/> -->
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="container">
+        <div id="heading">
+            <div id="PageHeading">
+                <h1> <span id="bit"> <span id="b">₿</span>IT</span>COIN</h1>
+
+            </div>
+            <div id="subheading">MAINNET ADDRESS GENERATOR</div>
+        </div>
+
+        <div id="main">
+            <div class='response' id='pvtKey'>
+                Private Key
+                <div class='subresponse'>
+                    {{private_key}}
+                </div>
+            </div>
+            <div class='response' id='pubKey'>
+                Public Key
+                <div class='subresponse'>
+                    {{public_key}}
+                </div>
+            </div>
+            <div class='response' id='address'>
+                Address
+                <div class='subresponse'>
+                    {{public_address}}
+                </div>
+            </div>
+            <div class='reset'>
+                <form action="/">
+                    <button class="reset_btn" type="submit" id="reset-hbid">New Address</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <footer>
+        <span>DISCLAIMER!</span>
+            This AddressGenerator is provided as is without any guarantees or warranty and is recommended for use of only education purpose. In association with the product we makes no warranties of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, of title, or of noninfringement of third party rights. Use of the product by a user is at the user’s risk.
+    </footer> -->
+
+
+</body>
+
+</html>
